@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h1>Изменить информацию об игре</h1>
+
+    <form method="post" th:action="@{/product/update}" th:object="${product}">
+        <label for="hidden-id"></label>
+        <input th:field="*{id}" id="hidden-id" type="number" hidden/>
+
+        <label for="input-name">Имя:</label>
+        <input th:field="*{name}" id="input-name" type="text" required minlength="1"/>
+
+        <label for="input-name">Производитель:</label>
+        <input th:field="*{manufacturer}" id="input-manufacturer" type="text"/>
+
+     <!--   <label for="input-name">Цена:</label>
+        <input th:field="*{date}" id="input-date" type="date"/>-->
+
+        <label for="input-name">Цена:</label>
+        <input th:field="*{price}" id="input-price" type="namber"/>
+
+        <button class="btn btn-success">Сохранить</button>
+        <a class="btn btn-danger" th:href="@{/templates/product}">Отменить</a>
+    </form>
+
+    <h3>
+        <a th:href="@{/}"> На домашнюю </a>
+    </h3>
+</div>
+</body>
+</html>

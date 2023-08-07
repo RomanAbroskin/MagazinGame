@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazin</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h1>Видеоигры</h1>
+
+    <p th:if="${newProduct != null}" class="alert alert-success">
+        Добавлена позиция [[${newProduct}]]
+    </p>
+
+    <p th:if="${updatedProduct != null}" class="alert alert-success">
+        Игра обнавленна [[${updatedProduct}]]
+    </p>
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Производитель</th>
+           <!-- <th>Дата выпуска</th>-->
+            <th>Цена</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+        <tbody class="table-danger">
+        <tr th:each="product: ${products}">
+            <td>[[${product.id}]]</td>
+            <td>
+                <a th:href="@{'/product/details/' + ${product.id}}"> [[${product.name}]] </a>
+            </td>
+            <td>[[${product.manufacturer}]]</td>
+            <td>[[${product.price}]]</td>
+            <td>
+                <a th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
+                <a th:href="@{'/product/update/' + ${product.id}}" class="btn btn-info"> Обновить </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>
+        <a th:href="@{/product/new}" class="btn btn-success"> Добавить игру </a>
+    </h3>
+    <h3>
+        <a th:href="@{/}"> На домашнюю </a>
+    </h3>
+</div>
+</body>
+</html>
