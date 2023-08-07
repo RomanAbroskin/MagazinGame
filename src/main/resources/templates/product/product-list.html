@@ -23,7 +23,7 @@
             <th>ID</th>
             <th>Имя</th>
             <th>Производитель</th>
-           <!-- <th>Дата выпуска</th>-->
+            <!--<th>Дата выпуска</th>-->
             <th>Цена</th>
             <th>Действие</th>
         </tr>
@@ -36,6 +36,7 @@
             </td>
             <td>[[${product.manufacturer}]]</td>
             <td>[[${product.price}]]</td>
+            <td>[[${product.date}]]</td>
             <td>
                 <a th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
                 <a th:href="@{'/product/update/' + ${product.id}}" class="btn btn-info"> Обновить </a>
