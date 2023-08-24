@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <title>Title</title>
+</head>
+<header th:insert="decoration/head-admin.html :: view-header"></header>
+
+<body>
+<div class="container-fluid text-center">
+    <h1>Клиенты</h1>
+    <p th:if="${newClient != null}" class="alert alert-success">Добавлен клиент [[${newClient.name}]]</p>
+    <p th:if="${updateClient != null}" class="alert alert-success">Обнавлен клиент [[${updateClient.name}]]</p>
+
+    <table style="width: 100%" class="table-secondary table-hover fs-4 fw-weight-bold text-warning bg-dark">
+        <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Логин</th>
+            <th>Дата регистрации</th>
+            <th>Действие</th>
+        </tr>
+        </thead>
+
+        <tbody class="text-danger table-bordered">
+        <tr th:each="client: ${clients}">
+            <td>[[${client.id}]]</td>
+            <td>
+                <a th:href="@{'/client/details/' + ${client.id}}"> [[${client.name}]] </a>
+            </td>
+            <td>[[${client.login}]]</td>
+            <td>[[${client.creationDateFormatted}]]</td>
+            <td>
+                <a th:href="@{'client/delete/' + ${client.id}}" class="btn btn-danger">Удалить</a>
+                <a th:href="@{'client/update/' + ${client.id}}" class="btn btn-outline-info">Обновить</a>
+            </td>
+        <tr th:if="${clients == null}">
+            <td class="text-center" colspan="8">Список клиентов пуст</td>
+        </tr>
+        </tr>
+        </tbody>
+    </table>
+    <!--<h3>
+        <a th:href="@{/client/new}" class="btn btn-success">Добавить клиента</a>
+    </h3>-->
+</div>
+<footer th:insert="decoration/footer.html :: footer"></footer>
+<style>
+    body{
+        background-image: url("[[@{/img/bar.jpg}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+</body>
+</html>

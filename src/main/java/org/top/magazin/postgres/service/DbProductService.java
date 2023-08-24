@@ -1,4 +1,4 @@
-package org.top.magazin.postgres;
+package org.top.magazin.postgres.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import org.top.magazin.entity.Product;
 import org.top.magazin.postgres.repository.ProductRepository;
 import org.top.magazin.service.ProductService;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -16,7 +17,9 @@ public class DbProductService implements ProductService {
 
     @Override
     public Product register(Product product) {
-        return productRepository.save(product);
+            var now = new Date(System.currentTimeMillis());
+            product.setDate(now);
+            return productRepository.save(product);
     }
 
     @Override
@@ -26,7 +29,11 @@ public class DbProductService implements ProductService {
 
     @Override
     public Iterable<Product> getAll() {
-        return productRepository.findAll();
+        var products = productRepository.findAll();
+        if (products.iterator().hasNext()){
+            return products;
+        }
+        return null;
     }
 
     @Override
@@ -34,8 +41,4 @@ public class DbProductService implements ProductService {
       productRepository.deleteById(id);
     }
 
-    @Override
-    public Product update(Product product) {
-        return null;
-    }
 }

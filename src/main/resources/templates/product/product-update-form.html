@@ -13,24 +13,32 @@
         <input th:field="*{id}" id="hidden-id" type="number" hidden/>
 
         <label for="input-name">Имя:</label>
-        <input th:field="*{name}" id="input-name" type="text" required minlength="1"/>
+        <input th:field="*{name}" id="input-name" type="text"/>
 
         <label for="input-name">Производитель:</label>
         <input th:field="*{manufacturer}" id="input-manufacturer" type="text"/>
 
-        <!--<label for="input-name">Цена:</label>
-        <input th:field="*{date}" id="input-date" type="date"/>-->
-
         <label for="input-name">Цена:</label>
-        <input th:field="*{price}" id="input-price" type="namber"/>
+        <input th:field="*{price}" id="input-price" type="number"/>
+
+        <label for="input-name">Описание:</label>
+        <input th:field="*{description}" id="input-description" type="text"/>
+
+        <label for="input-name">Дата выхода:</label>
+        <input th:field="*{dateGod}" id="input-dateGod" type="date"/>
 
         <button class="btn btn-success">Сохранить</button>
-        <a class="btn btn-danger" th:href="@{/templates/product}">Отменить</a>
+        <a class="btn btn-danger" th:href="@{/product}">Отменить</a>
     </form>
 
-    <h3>
-        <a th:href="@{/}"> На домашнюю </a>
-    </h3>
+    <footer th:insert="decoration/footer.html :: footer"></footer>
 </div>
 </body>
+<style>
+    body{
+        background-image: url("[[@{/img/9l.webp}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 </html>

@@ -1,18 +1,18 @@
 package org.top.magazin.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Set;
 
-@Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table
 public class Product {
@@ -31,15 +31,26 @@ public class Product {
     private Date date;
 
     @Column
-    private Integer price;
+    private Double price;
+
+    @Column(length = 1024)
+    private String description;
+
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String img;
+
+    @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date dateGod;
 
     @ManyToMany(mappedBy = "Basket")
     private Set<Client> client;
-
-    @ManyToMany(mappedBy = "games")
-    private Set<PersonalAccount> personalAccounts;
-
-    @ManyToMany(mappedBy = "product")
-    private Set<Admin> admin;
-
+    
+    public String creationDateFormatted() {
+        if(date!=null){
+            DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            return formatter.format(date);
+        } return null;
+    }
 }

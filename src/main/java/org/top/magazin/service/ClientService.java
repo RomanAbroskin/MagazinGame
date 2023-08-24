@@ -12,5 +12,4 @@ public interface ClientService {
     Optional<Client> getById(Integer id);     // получить клиента по id
     Iterable<Client> getAll();      // получить всех клиентов
     void deleteById(Integer id); // удалить клиента
-    Client update (Client client); // обновить клиента
 }

@@ -1,4 +1,4 @@
-package org.top.magazin.postgres;
+package org.top.magazin.postgres.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import org.top.magazin.entity.Admin;
 import org.top.magazin.postgres.repository.AdminRepository;
 import org.top.magazin.service.AdminService;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -20,22 +21,11 @@ public class DbAdminService implements AdminService {
     }
 
     @Override
-    public Optional<Admin> getById(Integer id) {
-        return adminRepository.findById(id);
-    }
-
-    @Override
     public Iterable<Admin> getAll() {
-        return adminRepository.findAll();
-    }
-
-    @Override
-    public void deleteById(Integer id) {
-       adminRepository.deleteById(id);
-    }
-
-    @Override
-    public Admin update(Admin admin) {
+        var admins = adminRepository.findAll();
+        if (admins.iterator().hasNext()){
+            return admins;
+        }
         return null;
     }
 }

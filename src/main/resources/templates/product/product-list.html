@@ -1,56 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Magazin</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
+<header th:insert="decoration/head-admin.html :: view-header"></header>
 <body>
-    <div class="container-fluid text-center">
-        <h1>Видеоигры</h1>
+<div class="container-fluid text-center">
+    <h1 class="text-secondary">Видеоигры</h1>
+    <p th:if="${newProduct != null}" class="alert alert-success">Добавленна игра [[${newProduct.name}]]</p>
+    <p th:if="${updateProduct != null}" class="alert alert-success">Обнавленна игра [[${updateProduct.name}]]</p>
 
-    <p th:if="${newProduct != null}" class="alert alert-success">
-        Добавлена позиция [[${newProduct}]]
-    </p>
-
-    <p th:if="${updatedProduct != null}" class="alert alert-success">
-        Игра обнавленна [[${updatedProduct}]]
-    </p>
-
-    <table class="table table-bordered">
+    <table style="width: 100%" class="table-secondary table-hover table-bordered fs-4 fw-weight-bold text-warning bg-dark">
         <thead class="table-dark">
         <tr>
-            <th>ID</th>
+            <th sec:authorize="hasRole('ADMIN')">ID</th>
             <th>Имя</th>
             <th>Производитель</th>
-            <!--<th>Дата выпуска</th>-->
+            <th>Дата записи</th>
             <th>Цена</th>
+            <th>Дата выпуска</th>
             <th>Действие</th>
         </tr>
         </thead>
-        <tbody class="table-danger">
+        <tbody>
         <tr th:each="product: ${products}">
-            <td>[[${product.id}]]</td>
+            <td sec:authorize="hasRole('ADMIN')">[[${product.id}]]</td>
             <td>
                 <a th:href="@{'/product/details/' + ${product.id}}"> [[${product.name}]] </a>
             </td>
             <td>[[${product.manufacturer}]]</td>
+            <td>[[${product.creationDateFormatted()}]]</td>
             <td>[[${product.price}]]</td>
-            <td>[[${product.date}]]</td>
+            <td>[[${#dates.format(product.dateGod, 'dd-MM-yyyy')}]]</td>
             <td>
-                <a th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
-                <a th:href="@{'/product/update/' + ${product.id}}" class="btn btn-info"> Обновить </a>
+                <a sec:authorize="hasRole('ADMIN')"th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/product/update/' + ${product.id}}" class="btn btn-info"> Обновить </a>
+                <a sec:authorize="hasRole('USER')" th:href="@{'/beginning/purchase/' + ${product.id}}" class="btn btn-danger">Купить</a>
             </td>
+        </tr>
+        <tr th:if="${products == null}">
+            <td class="text-center" colspan="8">Список игр пуст</td>
         </tr>
         </tbody>
     </table>
-
     <h3>
-        <a th:href="@{/product/new}" class="btn btn-success"> Добавить игру </a>
+        <a sec:authorize="hasRole('ADMIN')" th:href="@{/product/new}" class="btn btn-success"> Добавить игру </a>
     </h3>
-    <h3>
-        <a th:href="@{/}"> На домашнюю </a>
-    </h3>
+    <footer th:insert="decoration/footer.html :: footer"></footer>
 </div>
+<style>
+    body{
+        background-image: url("[[@{/img/Gamestop.jpg}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    th{
+
+    }
+</style>
 </body>
 </html>

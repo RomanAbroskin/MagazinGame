@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Magazin</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<header th:insert="decoration/head-admin.html :: view-header"></header>
+<body>
+<div class="container-fluid text-center">
+    <h1>Ваш заказ</h1>
+    <table style="width: 100%" class="table-secondary table-hover table-bordered fs-4 fw-weight-bold text-warning bg-dark">
+        <tbody>
+        <tr th:each="product: ${products}">
+            <td>
+                [[${product.name}]]
+            </td>
+            <td>[[${product.price}]]</td>
+            <td>
+                <a th:href="@{'/beginning/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
+            </td>
+        </tr>
+        <tr th:if="${products == null}">
+            <td class="text-center" colspan="8">Список игр пуст</td>
+        </tr>
+        <tr><td class="text-bg-light, t" colspan="1">К ОПЛАТЕ</td>
+            <td><a class="btn btn-danger">купить</a></td>
+        </tr>
+        </tbody>
+        <style>
+            body{
+                background-image: url("[[@{/img/7.jpg}]]");
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        </style>
+    </table>
+
+    <footer th:insert="decoration/footer.html :: footer"></footer>
+</div>
+</body>
+</html>

@@ -5,29 +5,52 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
-<div class="container-fluid text-center">
+<div class="container-fluid text-left">
     <h1>Добавить игру</h1>
 
     <form method="post" th:action="@{/product/new}" th:object="${newProduct}">
-        <label for="input-name">Имя:</label>
-        <input th:field="*{name}" id="input-name" type="text" required minlength="1"/>
+        <table class=" text-center">
+            <tr>
+                <td ><label for="input-name">Имя:</label></td>
+                <td><input th:field="*{name}" id="input-name" type="text"/></td>
+            </tr>
+            <tr>
+                <td><label for="input-name">Производитель:</label></td>
+                <td><input th:field="*{manufacturer}" id="input-manufacturer" type="text"/></td>
+            </tr>
 
-        <label for="input-name">Производитель:</label>
-        <input th:field="*{manufacturer}" id="input-manufacturer" type="text"/>
+            <tr>
+                <td><label for="input-name">Цена:</label></td>
+                <td><input th:field="*{price}" id="input-price" type="number"/></td>
+            </tr>
 
-        <!--<label for="input-name">Дата выхода:</label>
-        <input th:field="*{date}" id="input-date" type="date"/>-->
+            <tr>
+                <td><label for="input-name">Описание:</label></td>
+                <td><input th:field="*{description}" id="input-description" type="text"/></td>
+            </tr>
 
-        <label for="input-name">Цена:</label>
-        <input th:field="*{price}" id="input-price" type="number"/>
+            <tr>
+                <td><label for="input-name">Дата выхода:</label></td>
+                <td><input th:field="*{dateGod}" id="input-dateGod" type="date"/></td>
+            </tr>
 
-        <button class="btn btn-success">Сохранить</button>
-        <a class="btn btn-danger" th:href="@{/templates/product}">Отменить</a>
+            <tr>
+                <td>
+                    <button class="btn btn-success">Сохранить</button>
+                </td>
+                <td><a class="btn btn-danger" th:href="@{/product}">Отменить</a></td>
+            </tr>
+        </table>
     </form>
 
-    <h3>
-        <a th:href="@{/}"> На домашнюю </a>
-    </h3>
+    <footer th:insert="decoration/footer.html :: footer"></footer>
 </div>
 </body>
+<style>
+    body{
+        background-image: url("[[@{/img/3.jpg}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 </html>

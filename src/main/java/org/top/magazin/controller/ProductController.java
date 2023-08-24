@@ -23,7 +23,7 @@ public class ProductController {
 
    @GetMapping("")
    public String productList (Model model){
-      Iterable<Product> products = productService.getAll();
+      var products = productService.getAll();
       model.addAttribute("products",products);
       return "product/product-list";
    }
@@ -69,7 +69,7 @@ public class ProductController {
    @PostMapping("update")
    public String updateProduct(Product updatedProduct, RedirectAttributes ra) {
       Product product = productService.register(updatedProduct);
-      ra.addFlashAttribute("updatedProduct", product);
+      ra.addFlashAttribute("updateProduct", product);
       return "redirect:/product";
    }
 

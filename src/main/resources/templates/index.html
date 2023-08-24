@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>OrdersMvcApp_Java225</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-</head>
+<th:block th:replace="decoration/head-admin.html :: head"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+  </head>
+  <header th:insert="decoration/head-admin.html :: view-header"></header>
 <body>
-<div class="container-fluid text-center">
-  <a th:href="@{/product}">Управление товарами</a>
-</div>
+<style>
+    body{
+        background-image: url("[[@{/img/la-paz-city.jpg}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
+<footer th:insert="decoration/footer.html :: footer"></footer>
 </body>
 </html>

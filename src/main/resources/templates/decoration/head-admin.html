@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Упарвление данными</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<nav class="navbar-expand-lg navbar navbar-dark bg-dark" th:fragment="view-header">
+    <a class="navbar-brand" th:href="@{/}">Store</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link"
+               th:classappend="${page=='product'? 'active': ''}"
+               th:href="@{/product}">Игры</a>
+            <a sec:authorize="hasRole('ADMIN')" class="nav-item nav-link"
+               th:classappend="${page=='client'? 'active': ''}"
+               th:href="@{/client}">Клиенты</a>
+            <a sec:authorize="hasRole('USER')" class="nav-item nav-link"
+               th:classappend="${page=='client-product'? 'active': ''}"
+               th:href="@{/beginning}">Корзина</a>
+        </div>
+    </div>
+    <form sec:authorize="isAuthenticated()" class="d-flex" role="search" method="post" th:action="@{/logout}">
+        <button class="btn btn-outline-success">Выйти</button>
+    </form>
+    <form sec:authorize="!isAuthenticated()" class="d-flex" role="search" method="get" th:action="@{/login}">
+        <button class="btn btn-outline-success">Войти</button>
+    </form>
+</nav>
+</body>
+</html>

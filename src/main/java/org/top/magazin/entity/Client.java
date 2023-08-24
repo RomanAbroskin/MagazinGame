@@ -1,19 +1,18 @@
 package org.top.magazin.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
 @NoArgsConstructor
-@AllArgsConstructor
+@Setter
+@Getter
 @Entity
 @Table
 public class Client {
@@ -26,21 +25,25 @@ public class Client {
     private String name;
 
     @Column
-    private String email;
+    private String login;
 
     @Column
-    private String account;
+    private String password;
 
-    @ManyToMany(mappedBy = "client")
-    private Set<Admin> admins;
+    @Column
+    private Date date;
 
-    @OneToOne
-    @JoinColumn(name = "personalAccount_id")
-    private PersonalAccount personalAccount;
+    @Column
+    private String role;
 
     @ManyToMany
     @JoinColumn(name = "produсt_id")
     private Set<Product> Basket;
 
-
+    public String creationDateFormatted() {
+        if(date!=null){
+            DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+            return formatter.format(date);
+        } return null;
+    }
 }

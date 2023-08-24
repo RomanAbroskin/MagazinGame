@@ -1,11 +1,14 @@
-package org.top.magazin.postgres;
+package org.top.magazin.postgres.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.top.magazin.entity.Client;
+import org.top.magazin.entity.Product;
 import org.top.magazin.postgres.repository.ClientRepository;
+import org.top.magazin.postgres.repository.ProductRepository;
 import org.top.magazin.service.ClientService;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -16,6 +19,8 @@ public class DbClientService implements ClientService {
 
     @Override
     public Client register(Client client) {
+        var now = new Date(System.currentTimeMillis());
+        client.setDate(now);
         return clientRepository.save(client);
     }
 
@@ -26,7 +31,11 @@ public class DbClientService implements ClientService {
 
     @Override
     public Iterable<Client> getAll() {
-        return clientRepository.findAll();
+        var clients = clientRepository.findAll();
+        if (clients.iterator().hasNext()){
+            return clients;
+        }
+        return null;
     }
 
     @Override
@@ -34,8 +43,4 @@ public class DbClientService implements ClientService {
         clientRepository.deleteById(id);
     }
 
-    @Override
-    public Client update(Client client) {
-        return null;
-    }
 }

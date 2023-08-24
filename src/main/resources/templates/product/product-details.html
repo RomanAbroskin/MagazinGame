@@ -6,9 +6,17 @@
 </head>
 <body>
 <div class="container-fluid text-center">
-    <h1>Информация о игре</h1>
-    [[${product}]]
-    <a th:href="@{/templates/product}">Обратно к клиентам</a>
+    <h1 class="text-white">Описание игры</h1>
+    <h2 class="text-white"> [[${product.description}]]</h2>
+    <a th:href="@{/product}">Обратно к играм</a>
+    <footer th:insert="decoration/footer.html :: footer"></footer>
 </div>
 </body>
+<style>
+    body{
+        background-image: url("[[@{/img/720475.jpg}]]");
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+</style>
 </html>
