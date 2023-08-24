@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.top</groupId>
-    <artifactId>SimpleBookDirectory_Java225</artifactId>
+    <artifactId>Magazin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SimpleBookDirectory_Java225</name>
     <description>SimpleBookDirectory_Java225</description>
