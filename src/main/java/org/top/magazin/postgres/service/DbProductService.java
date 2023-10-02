@@ -2,6 +2,8 @@ package org.top.magazin.postgres.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.top.magazin.entity.Client;
 import org.top.magazin.entity.Product;
 import org.top.magazin.postgres.repository.ProductRepository;
 import org.top.magazin.service.ProductService;
@@ -16,29 +18,42 @@ public class DbProductService implements ProductService {
     private final ProductRepository productRepository;
 
     @Override
-    public Product register(Product product) {
-            var now = new Date(System.currentTimeMillis());
-            product.setDate(now);
-            return productRepository.save(product);
+    public String productListOptions(Optional<Client> optionalClient, Model model) {
+        if(optionalClient.isPresent()) {
+            Client client = optionalClient.get();
+            var products = productRepository.findAll();
+            var productBasket = client.getBasket();
+            model.addAttribute("productBasket", productBasket);
+            model.addAttribute("products", products);
+            return "product/product-list";
+        }return "Нет клиента";
     }
-
     @Override
-    public Optional<Product> getById(Integer id) {
-        return productRepository.findById(id);
-    }
-
-    @Override
-    public Iterable<Product> getAll() {
-        var products = productRepository.findAll();
-        if (products.iterator().hasNext()){
-            return products;
+    public String detailsProductOptions(Integer id, Model model) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            model.addAttribute("product", product.get());
+            return "product/product-details";
         }
-        return null;
+        return "redirect:/product";
     }
-
+    @Override
+    public String updateProductOptions(Integer id, Model model) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            model.addAttribute("product", product);
+            return "product/product-update-form";
+        }
+        return "redirect:/product";
+    }
+    @Override
+    public Product register(Product product) {
+        var now = new Date(System.currentTimeMillis());
+        product.setDate(now);
+        return productRepository.save(product);
+    }
     @Override
     public void deleteById(Integer id) {
-      productRepository.deleteById(id);
+        productRepository.deleteById(id);
     }
-
 }

@@ -8,27 +8,45 @@
 <div class="container-fluid text-center">
     <h1>Изменить информацию об игре</h1>
 
-    <form method="post" th:action="@{/product/update}" th:object="${product}">
-        <label for="hidden-id"></label>
-        <input th:field="*{id}" id="hidden-id" type="number" hidden/>
-
-        <label for="input-name">Имя:</label>
-        <input th:field="*{name}" id="input-name" type="text"/>
-
-        <label for="input-name">Производитель:</label>
-        <input th:field="*{manufacturer}" id="input-manufacturer" type="text"/>
-
-        <label for="input-name">Цена:</label>
-        <input th:field="*{price}" id="input-price" type="number"/>
-
-        <label for="input-name">Описание:</label>
-        <input th:field="*{description}" id="input-description" type="text"/>
-
-        <label for="input-name">Дата выхода:</label>
-        <input th:field="*{dateGod}" id="input-dateGod" type="date"/>
-
-        <button class="btn btn-success">Сохранить</button>
-        <a class="btn btn-danger" th:href="@{/product}">Отменить</a>
+    <form method="post" enctype="multipart/form-data" th:action="@{/product/update}" th:object="${product}">
+        <div class="container" >
+            <div class="row align-items-start">
+                <label for="hidden-id"></label>
+                <input th:field="*{id}" id="hidden-id" type="number" hidden/>
+        <div class="col-sm-2">
+        <label class="text-light" for="previewImag">Изображение игры</label>
+        <input id="previewImag" name="previewImag" type="file" class="form-control"/>
+        </div>
+        <div class="col-sm-2">
+        <label class="text-light" for="input-name">Имя:</label>
+        <input th:field="*{name}" id="input-name" type="text" class="form-control"/>
+        </div>
+        <div class="col-sm-2">
+        <label class="text-light" for="input-name">Производитель:</label>
+        <input th:field="*{manufacturer}" id="input-manufacturer" type="text" class="form-control"/>
+        </div>
+        <div class="col-sm-1">
+        <label class="text-light" for="input-name">Цена:</label>
+        <input th:field="*{price}" id="input-price" type="number" class="form-control"/>
+        </div>
+        <div class="col-sm-1">
+        <label class="text-light" for="input-name">Описание:</label>
+        <input th:field="*{description}" id="input-description" type="text" class="form-control"/>
+        </div>
+        <div class="col-sm-2">
+        <label class="text-light" for="input-name">Дата выхода:</label>
+        <input th:field="*{dateGod}" id="input-dateGod" type="date" class="form-control"/>
+        </div>
+                <div class="col-sm-1">
+                    <label for="input-name"></label>
+                    <button class="btn btn-success">Сохранить</button>
+                </div>
+                <div class="col-sm-1">
+                    <label for="input-name"></label>
+                    <a class="btn btn-danger" th:href="@{/product}">Отменить</a>
+                </div>
+        </div>
+        </div>
     </form>
 
     <footer th:insert="decoration/footer.html :: footer"></footer>

@@ -9,13 +9,13 @@
 <body>
 <div class="container-fluid text-center">
     <h1>Ваш заказ</h1>
-    <table style="width: 100%" class="table-secondary table-hover table-bordered fs-4 fw-weight-bold text-warning bg-dark">
+    <table style="width: 100%" class="table-secondary table-hover fs-4 fw-weight-bold text-warning bg-dark bg-success p-2 bg-opacity-75">
         <tbody>
         <tr th:each="product: ${products}">
             <td>
                 [[${product.name}]]
             </td>
-            <td>[[${product.price}]]</td>
+            <td>[[${product.price}]] ₽</td>
             <td>
                 <a th:href="@{'/beginning/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
             </td>
@@ -23,8 +23,10 @@
         <tr th:if="${products == null}">
             <td class="text-center" colspan="8">Список игр пуст</td>
         </tr>
-        <tr><td class="text-bg-light, t" colspan="1">К ОПЛАТЕ</td>
-            <td><a class="btn btn-danger">купить</a></td>
+        <tr class="table-info">
+            <td class="text-bg-light" colspan="1">К ОПЛАТЕ</td>
+            <td class="text-bg-light" colspan="1">[[${sum}]] ₽</td>
+            <td class="text-bg-light" colspan="1"><a th:href="@{'/beginning/delete/buy'}" class="btn btn-success">купить</a></td>
         </tr>
         </tbody>
         <style>
@@ -32,6 +34,9 @@
                 background-image: url("[[@{/img/7.jpg}]]");
                 background-size: cover;
                 background-repeat: no-repeat;
+            }
+            tbody{
+                background-image: var(--bs-gradient);
             }
         </style>
     </table>

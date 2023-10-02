@@ -8,37 +8,43 @@
 <div class="container-fluid text-left">
     <h1>Добавить игру</h1>
 
-    <form method="post" th:action="@{/product/new}" th:object="${newProduct}">
+    <form method="post" enctype="multipart/form-data" th:action="@{/product/new}" th:object="${newProduct}">
         <table class=" text-center">
-            <tr>
-                <td ><label for="input-name">Имя:</label></td>
-                <td><input th:field="*{name}" id="input-name" type="text"/></td>
+           <tr>
+                <td><label for="input-name">Имя:</label></td>
+                <td><input th:field="*{name}" id="input-name" type="text" class="form-control "/></td>
             </tr>
             <tr>
-                <td><label for="input-name">Производитель:</label></td>
-                <td><input th:field="*{manufacturer}" id="input-manufacturer" type="text"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="input-name">Цена:</label></td>
-                <td><input th:field="*{price}" id="input-price" type="number"/></td>
+                <td><label for="input-manufacturer">Производитель:</label></td>
+                <td><input th:field="*{manufacturer}" id="input-manufacturer" type="text" class="form-control"/></td>
             </tr>
 
             <tr>
-                <td><label for="input-name">Описание:</label></td>
-                <td><input th:field="*{description}" id="input-description" type="text"/></td>
+                <td><label for="input-price">Цена:</label></td>
+                <td><input th:field="*{price}" id="input-price" type="number" class="form-control"/></td>
             </tr>
 
             <tr>
-                <td><label for="input-name">Дата выхода:</label></td>
-                <td><input th:field="*{dateGod}" id="input-dateGod" type="date"/></td>
+                <td><label for="input-description">Описание:</label></td>
+                <td><input th:field="*{description}" id="input-description" type="text" class="form-control"/></td>
             </tr>
 
+            <tr>
+                <td><label for="input-dateGod">Дата выхода:</label></td>
+                <td><input th:field="*{dateGod}" id="input-dateGod" type="date" class="form-control"/></td>
+            </tr>
+
+            <tr>
+            <label>
+                <td><label for="previewImage">Изображение игры</label></td>
+                <td><input type="file" id="previewImage" class="form-control" name="previewImage"></td>
+            </label>
+            </tr>
             <tr>
                 <td>
                     <button class="btn btn-success">Сохранить</button>
                 </td>
-                <td><a class="btn btn-danger" th:href="@{/product}">Отменить</a></td>
+                <td class="text-start"><a class="btn btn-danger" th:href="@{/product}">Отменить</a></td>
             </tr>
         </table>
     </form>

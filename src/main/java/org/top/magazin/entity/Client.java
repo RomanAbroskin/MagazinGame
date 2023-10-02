@@ -22,9 +22,6 @@ public class Client {
     private Integer id;
 
     @Column
-    private String name;
-
-    @Column
     private String login;
 
     @Column

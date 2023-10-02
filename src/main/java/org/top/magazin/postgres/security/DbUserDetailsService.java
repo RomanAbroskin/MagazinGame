@@ -26,4 +26,5 @@ public class DbUserDetailsService implements UserDetailsService {
         userDetails.setClient(client.get());
         return userDetails;
     }
+
 }

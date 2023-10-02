@@ -8,15 +8,18 @@
 <header th:insert="decoration/head-admin.html :: view-header"></header>
 <body>
 <div class="container-fluid text-center">
-    <h1 class="text-secondary">Видеоигры</h1>
-    <p th:if="${newProduct != null}" class="alert alert-success">Добавленна игра [[${newProduct.name}]]</p>
-    <p th:if="${updateProduct != null}" class="alert alert-success">Обнавленна игра [[${updateProduct.name}]]</p>
+    <div class="w-25 alert bg-dark d-inline-block bg-opacity-75">
+    <H1 class="text-light">Видеоигры</H1>
+    </div>
+    <p th:if="${newProduct != null}" class="alert bg-dark text-light">Добавлена игра [[${newProduct.name}]]</p>
+    <p th:if="${updateProduct != null}" class="alert bg-dark text-light">Обновлена игра [[${updateProduct.name}]]</p>
 
-    <table style="width: 100%" class="table-secondary table-hover table-bordered fs-4 fw-weight-bold text-warning bg-dark">
+    <table style="width: 100%" class="table-secondary table-hover fs-4 fw-weight-bold text-warning bg-dark bg-success p-2 bg-opacity-75">
         <thead class="table-dark">
         <tr>
             <th sec:authorize="hasRole('ADMIN')">ID</th>
-            <th>Имя</th>
+            <th>Изображение игры</th>
+            <th>Название игры</th>
             <th>Производитель</th>
             <th>Дата записи</th>
             <th>Цена</th>
@@ -26,18 +29,20 @@
         </thead>
         <tbody>
         <tr th:each="product: ${products}">
-            <td sec:authorize="hasRole('ADMIN')">[[${product.id}]]</td>
+            <td  sec:authorize="hasRole('ADMIN')">[[${product.id}]]</td>
+            <td class="img"><img th:src="@{'data:image/jpeg;base64,' + ${product.previewImageG}}"></td>
             <td>
-                <a th:href="@{'/product/details/' + ${product.id}}"> [[${product.name}]] </a>
+                <a class="text-warning fw-bold" th:href="@{'/product/details/' + ${product.id}}"> [[${product.name}]] </a>
             </td>
             <td>[[${product.manufacturer}]]</td>
             <td>[[${product.creationDateFormatted()}]]</td>
-            <td>[[${product.price}]]</td>
+            <td>[[${product.price}]] ₽</td>
             <td>[[${#dates.format(product.dateGod, 'dd-MM-yyyy')}]]</td>
-            <td>
-                <a sec:authorize="hasRole('ADMIN')"th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-danger"> Удалить </a>
-                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/product/update/' + ${product.id}}" class="btn btn-info"> Обновить </a>
-                <a sec:authorize="hasRole('USER')" th:href="@{'/beginning/purchase/' + ${product.id}}" class="btn btn-danger">Купить</a>
+            <td class="a">
+                <a sec:authorize="hasRole('ADMIN')"th:href="@{'/product/delete/' + ${product.id}}" class="btn btn-outline-primary"> Удалить </a>
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{'/product/update/' + ${product.id}}" class="btn btn-outline-danger"> Обновить </a>
+                <a th:if="${!productBasket.contains(product)}" sec:authorize="hasRole('USER')" th:href="@{'/beginning/purchase/' + ${product.id}}" class="btn btn-primary">В корзину</a>
+                <p th:if="${productBasket.contains(product)}" sec:authorize="hasRole('USER')" class="mb-0 btn btn-info">В корзине</p>
             </td>
         </tr>
         <tr th:if="${products == null}">
@@ -56,8 +61,20 @@
         background-size: cover;
         background-repeat: no-repeat;
     }
-    th{
-
+    tbody{
+        background-image: var(--bs-gradient);
+    }
+    img {
+        display: inline-block;
+        max-width: 50%;
+        height: auto;
+    }
+    .img{
+        width: 10px;
+        height: auto;
+    }
+    .a{
+        display: inline-block;
     }
 </style>
 </body>

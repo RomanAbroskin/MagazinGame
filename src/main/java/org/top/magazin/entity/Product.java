@@ -3,7 +3,6 @@ package org.top.magazin.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,9 +35,8 @@ public class Product {
     @Column(length = 1024)
     private String description;
 
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String img;
+    @Column(length = 10000000)
+    private String previewImageG;
 
     @Column
     @DateTimeFormat(pattern = "yyyy-MM-dd")

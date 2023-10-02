@@ -6,12 +6,19 @@
   </head>
   <header th:insert="decoration/head-admin.html :: view-header"></header>
 <body>
+<div class="mt-5 px-5">
+<div  class="w-50 alert bg-dark text-warning bg-opacity-75">
+ <h1 style="font-family:Monotype Corsiva;">Заходи к нам путник и открой для себя новыe миры!<h1/>
+</div>
+</div>
 <style>
     body{
-        background-image: url("[[@{/img/la-paz-city.jpg}]]");
-        background-size: cover;
+
+        background-image: url("[[@{/img/19.jpg}]]");
+        background-size: 100% 100%;
         background-repeat: no-repeat;
-    }
+        background-attachment: fixed;
+        }
 </style>
 <footer th:insert="decoration/footer.html :: footer"></footer>
 </body>

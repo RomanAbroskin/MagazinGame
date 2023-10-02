@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
+
 <body>
+<!--<img th:src="@{'data:image/jpeg;base64,' + ${product.previewImageG}}" width="100%" height="100%">-->
 <div class="container-fluid text-center">
-    <h1 class="text-white">Описание игры</h1>
-    <h2 class="text-white"> [[${product.description}]]</h2>
+    <h1 class="text-warning" style="font-family:Monotype Corsiva;">Описание игры</h1>
+    <h2 class="text-warning" style="font-family:Monotype Corsiva;"> [[${product.description}]]</h2>
     <a th:href="@{/product}">Обратно к играм</a>
     <footer th:insert="decoration/footer.html :: footer"></footer>
 </div>
